@@ -1,0 +1,6 @@
+version : "3"
+services:
+  nginx:
+    container-name : "Nginx"
+    build: /SRC/nginx
+    ports: - "443:443"
