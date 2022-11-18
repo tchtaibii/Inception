@@ -1,0 +1,66 @@
+version : "3"
+#containers 
+services:
+  #mariadb container
+  mariadb:
+    build: /Users/tchtaibi/Desktop/inception/srcs/requirements/mariadb
+    container_name: mariadb
+    ports:
+      - "3306:9000"
+    env_file:
+      - /Users/tchtaibi/Desktop/inception/srcs/requirements/mariadb/.env
+    volumes:
+      - mariadb:/var/lib/mysql
+    restart: always
+    networks: 
+      - net
+  #wordpress container
+  wordpress:
+    depends_on: 
+      - mariadb
+    build: /Users/tchtaibi/Desktop/inception/srcs/requirements/wordpress/
+    container_name: wordpress
+    ports:
+      - "9000:443"
+    env_file:
+      - /Users/tchtaibi/Desktop/inception/srcs/requirements/wordpress/.env
+    volumes:
+      - wordpress:/var/www/html/:ro
+    restart: always
+    networks: 
+      - net
+  #nginx container
+  nginx:
+    depends_on: 
+      - wordpress
+    build: /Users/tchtaibi/Desktop/inception/srcs/requirements/ngnix/
+    container_name: nginx
+    ports: 
+      - "443:443"
+    volumes:
+      - wordpress:/var/www/html/:ro
+    restart: always
+    networks: 
+      - net
+#volumes 
+volumes:
+  #wordpress volume
+  wordpress:
+    driver: local
+    driver_opts: 
+      type: none
+      o: bind
+      device: Users/tchtaibi/Desktop/inception/srcs/requirements/volume/wordpress
+    # device: '/home/tchtaibi/data/wordpress'
+  #mariadb volume
+  mariadb:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /Users/tchtaibi/Desktop/inception/srcs/requirements/volume/db
+    # device: '/home/tchtaibi/data/db'
+#networks 
+networks:
+  net:
+    driver: bridge

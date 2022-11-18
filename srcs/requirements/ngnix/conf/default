@@ -14,12 +14,16 @@ server {
 
         
 
-        root /var/www/html;
-        index index.html index.htm index.nginx-debian.html;
+        root /var/www/html/wordpress;
+        index.php;
 
         server_name _;
 
         location / {
-                try_files $uri $uri/ =404;
+                try_files $uri $uri/ /index.php?$args;
+        }
+        location ~ \.php${
+                include snippets/fastcgi-php.conf;
+                fastcgi_pass unix:run/php/php7.2-fpm.sock;
         }
 }
