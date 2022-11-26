@@ -1,9 +1,8 @@
-server {
         listen 80 default_server;
         listen [::]:80 default_server;
 
         # SSL configuration
-        
+
         listen 443 ssl default_server;
         listen [::]:443 ssl default_server;
 
@@ -12,20 +11,13 @@ server {
         ssl_certificate_key /etc/ssl/private.key;
         ssl_protocols TLSv1.2;
 
-        
 
-        root /var/www/html/wordpress;
-        index index.php;
+
+        root /var/www/html;
+        index index.html index.htm index.nginx-debian.html;
 
         server_name _;
 
         location / {
-		try_files $uri $uri/ =404;
-		autoindex on;
-	}
-
-	location ~ \.php$ {
-		include snippets/fastcgi-php.conf;
-		fastcgi_pass wordpress:9000;
-	}
-}
+                try_files $uri $uri/ =404;
+        }
