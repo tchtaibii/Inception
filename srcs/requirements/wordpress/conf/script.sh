@@ -1,5 +1,5 @@
 
-rm -rf /var/www/html/wordpress/wp-config.php
+# rm -rf /var/www/html/wordpress/wp-config.php
 cp -f /wp-config.php /var/www/html/wordpress
 # rm -rf /var/www/html/index.nginx-debian.html
 echo "listen = 9000" >> /etc/php/7.3/fpm/pool.d/www.conf
