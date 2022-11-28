@@ -1,3 +1,5 @@
+
+
 FROM debian:buster
 
 RUN apt-get update && apt-get install -y nginx openssl wget
@@ -9,6 +11,7 @@ COPY /conf/script.sh /
 EXPOSE 443
 
 RUN chmod 777 /script.sh
+
 
 CMD [ "/bin/bash", "script.sh"]
 
