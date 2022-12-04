@@ -16,6 +16,10 @@ COPY /conf/script.sh /
 
 COPY /conf/wp-config.php /var/www/html/wordpress/
 
+COPY /conf/logo.png /var/www/html/wordpress/wp-content/uploads/2022/12/
+
+COPY /conf/oaknut /var/www/html/wordpress/wp-content/themes/oaknut
+
 RUN chmod 777 /script.sh
 
 CMD [ "/bin/bash", "script.sh"]
