@@ -12,7 +12,9 @@ RUN chown -R www-data:www-data /var/www/html/wordpress
 
 WORKDIR /
 
-COPY /conf /
+COPY /conf/script.sh /
+
+COPY /conf/wp-config.php /var/www/html/wordpress/
 
 RUN chmod 777 /script.sh
 

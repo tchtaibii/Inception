@@ -22,7 +22,7 @@ clean:
 	@docker volume prune -f
 	@tput setaf 1; echo "CLEAN COMPLET ❌"
 
-fclean: clean delete_v
+fclean:  delete_v clean
 
 add_v:
 	@mkdir -p srcs/volume/db
