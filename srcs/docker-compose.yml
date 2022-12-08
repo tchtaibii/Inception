@@ -3,7 +3,13 @@ version : "3"
 services:
   #mariadb container
   mariadb:
-    build: ${PWD}/requirements/mariadb
+    build: 
+      dockerfile: ${PWD}/requirements/mariadb/Dockerfile
+      args:
+        - DB_NAME
+        - DB_USER
+        - DB_PASSWORD
+        - DB_ADMIN_PASSWORD
     container_name: mariadb
     ports:
       - "3306:3306"
@@ -21,8 +27,6 @@ services:
     container_name: wordpress
     ports:
       - "9000:9000"
-    env_file:
-      - .env
     volumes:
       - wordpress:/var/www/html/
     networks:
