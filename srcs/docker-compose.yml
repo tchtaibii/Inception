@@ -7,9 +7,9 @@ services:
       dockerfile: ${PWD}/requirements/mariadb/Dockerfile
       args:
         - DB_NAME
-        - DB_USER
-        - DB_PASSWORD
-        - DB_ADMIN_PASSWORD
+        - MYSQL_ROOT_USER
+        - MYSQL_PASSWORD
+        - MYSQL_ROOT_PASSWORD
     container_name: mariadb
     ports:
       - "3306:3306"
@@ -29,11 +29,11 @@ services:
         - DB_NAME
         - DB_USER
         - DB_PASSWORD
-        - title
+        - DB_HOST
+        - admin_email
         - admin_user
         - admin_password
-        - admin_email
-        - DB_HOST
+        - title
     container_name: wordpress
     ports:
       - "9000:9000"
@@ -64,16 +64,14 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: ${PWD}/volume/wordpress
-    # device: '/home/tchtaibi/data/wordpress'
+      device: ${PWD}/tools/volume/wordpress
   #mariadb volume
   mariadb:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: ${PWD}/volume/db
-    # device: '/home/tchtaibi/data/db'
+      device: ${PWD}/tools/volume/db
 #networks 
 networks:
   net:

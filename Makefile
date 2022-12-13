@@ -3,14 +3,12 @@ all: add_v up
 # add_host:
 # 	echo "127.0.1.1       tchtaibi.42.fr" >> /etc/hosts
 
-
 restart:
 	@cd srcs/ ; docker compose -f ./docker-compose.yml restart
 
 up:
 	@tput setaf 2; echo "🕐 Please wait..."
 	@cd srcs ; docker compose -f ./docker-compose.yml up --build
-	@cd ..
 
 down : clean 
 	@cd /srcs ;  docker compose -f ./docker-compose.yml down
@@ -24,11 +22,11 @@ clean:
 fclean:  delete_v clean
 
 add_v:
-	@mkdir -p srcs/volume/db
-	@mkdir -p srcs/volume/wordpress
+	@mkdir -p srcs/tools/volume/db srcs/tools/volume/wordpress
+	@mkdir -p 
 	# @chmod 777 srcs/volume/db srcs/volume/wordpress
 	@tput setaf 2; echo "Dir volumes are created ✅"
 
 delete_v: 
-	cd srcs ; rm -rf volume
+	cd srcs/tools/volume ; rm -rf *
 	@tput setaf 1; echo "Dir volumes are deleted ❌"
