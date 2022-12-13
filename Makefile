@@ -23,8 +23,6 @@ fclean:  delete_v clean
 
 add_v:
 	@mkdir -p srcs/tools/volume/db srcs/tools/volume/wordpress
-	@mkdir -p 
-	# @chmod 777 srcs/volume/db srcs/volume/wordpress
 	@tput setaf 2; echo "Dir volumes are created ✅"
 
 delete_v: 

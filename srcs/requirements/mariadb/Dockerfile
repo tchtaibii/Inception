@@ -14,6 +14,7 @@ ARG DB_NAME \
     MYSQL_ROOT_PASSWORD
 
 RUN service mysql start
-RUN chmod 777 /script.sh && bash script.sh
+RUN chmod 777 /script.sh
+RUN bash script.sh
 RUN service mysql stop
 CMD ["mysqld"]

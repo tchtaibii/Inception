@@ -4,12 +4,7 @@ RUN apt-get update && apt-get install -y nginx openssl wget
 
 COPY /conf/default /etc/nginx/sites-available/
 
-COPY /conf/script.sh /
+RUN openssl req -new -newkey rsa:2048 -days 365 -nodes -x509 -keyout /etc/ssl/private.key -out /etc/ssl/crt.crt -passout pass:"Neo$4ev" -subj "/C=MA/ST=CASABLANCA/L=BENGUERIR/O=TEHSUS/CN=tehsusrhist@gmail.com" >&-
 
-EXPOSE 443
-
-RUN chmod 777 /script.sh
-
-
-CMD [ "/bin/bash", "script.sh"]
+CMD ["nginx", "-g", "daemon off;"]
 
