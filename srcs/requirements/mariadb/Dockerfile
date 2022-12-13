@@ -12,7 +12,7 @@ COPY ${PWD}/requirements/mariadb/conf/my.cnf /etc/mysql/my.cnf
 ARG DB_NAME \
     DB_USER \
     DB_PASSWORD \
-    DB_ADMIN_PASSWORD
+    DB_ROOT_PASSWORD
 
 RUN service mysql start
 RUN chmod 777 /script.sh && bash script.sh

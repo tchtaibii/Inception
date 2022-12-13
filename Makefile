@@ -10,7 +10,6 @@ restart:
 up:
 	@tput setaf 2; echo "🕐 Please wait..."
 	@cd srcs ; docker compose -f ./docker-compose.yml up --build
-	@tput setaf 2; echo "Containers are working now ✅"
 	@cd ..
 
 down : clean 
