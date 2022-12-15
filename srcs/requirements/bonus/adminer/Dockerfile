@@ -6,4 +6,3 @@ RUN wget "http://www.adminer.org/latest.php" -O /var/www/html/adminer/index.php
 RUN chmod 755 /var/www/html/adminer/index.php
 RUN chown -R www-data:www-data /var/www/html/adminer/index.php
 CMD php -S [::]:8080 -t /var/www/html/adminer/
-

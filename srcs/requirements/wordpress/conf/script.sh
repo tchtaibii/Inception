@@ -10,3 +10,4 @@ wp plugin install redis-cache --activate  --allow-root --path="/var/www/html/wor
 wp redis enable --allow-root --force --path="/var/www/html/wordpress"
 service php7.3-fpm start
 service php7.3-fpm stop
+exec "$@"
