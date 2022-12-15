@@ -9,6 +9,7 @@ COPY ${PWD}/requirements/mariadb/conf/script.sh /
 COPY ${PWD}/requirements/mariadb/conf/my.cnf /etc/mysql/my.cnf
 
 ARG DB_NAME \
+    MYSQL_USER \
     MYSQL_ROOT_USER \
     MYSQL_PASSWORD \
     MYSQL_ROOT_PASSWORD

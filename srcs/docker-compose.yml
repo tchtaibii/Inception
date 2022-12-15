@@ -7,7 +7,7 @@ services:
       dockerfile: ${PWD}/requirements/mariadb/Dockerfile
       args:
         - DB_NAME
-        - MYSQL_ROOT_USER
+        - MYSQL_USER
         - MYSQL_PASSWORD
         - MYSQL_ROOT_PASSWORD
     container_name: mariadb
@@ -62,6 +62,16 @@ services:
     build : ${PWD}/requirements/bonus/redis
     ports:
       - "6379:6379"
+    networks:
+      - net
+  #adminer
+  adminer:
+    depends_on:
+      - wordpress
+    container_name: adminer
+    build: ${PWD}/requirements/bonus/adminer
+    ports:
+      - "8080:8080"
     networks:
       - net
 #volumes 

@@ -10,7 +10,7 @@ up:
 	@tput setaf 2; echo "🕐 Please wait..."
 	@cd srcs ; docker compose -f ./docker-compose.yml up --build
 
-down : clean 
+down : clean
 	@cd /srcs ;  docker compose -f ./docker-compose.yml down
 clean: 
 	@docker system prune -af
