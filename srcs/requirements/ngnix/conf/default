@@ -16,7 +16,8 @@ server {
         index index.html index.php;
 
         server_name Inception;
-        location /website {
+        location /website/ {
+          proxy_pass http://website:3000/;
           autoindex on;
         }
         location /adminer {

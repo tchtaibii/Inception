@@ -74,8 +74,6 @@ services:
     build : ${PWD}/requirements/bonus/website
     # ports:
     #   - "3000:3000"
-    volumes:
-      - wordpress:/var/www/html/
     networks:
       - net
 #volumes 
