@@ -11,8 +11,6 @@ services:
         - MYSQL_PASSWORD
         - MYSQL_ROOT_PASSWORD
     container_name: mariadb
-    ports:
-      - "3306:3306"
     env_file:
       - .env
     volumes:
@@ -35,8 +33,6 @@ services:
         - admin_password
         - title
     container_name: wordpress
-    ports:
-      - "9000:9000"
     env_file:
       - .env
     volumes:
@@ -60,8 +56,6 @@ services:
   redis :
     container_name : redis
     build : ${PWD}/requirements/bonus/redis
-    ports:
-      - "6379:6379"
     networks:
       - net
   #adminer
@@ -70,8 +64,18 @@ services:
       - wordpress
     container_name: adminer
     build: ${PWD}/requirements/bonus/adminer
-    ports:
-      - "8080:8080"
+    networks:
+      - net
+  #website
+  website:
+    depends_on:
+      - nginx
+    container_name: website
+    build : ${PWD}/requirements/bonus/website
+    # ports:
+    #   - "3000:3000"
+    volumes:
+      - wordpress:/var/www/html/
     networks:
       - net
 #volumes 

@@ -13,18 +13,21 @@ server {
         ssl_protocols TLSv1.2;
 
         root /var/www/html/wordpress;
-        index index.php;
+        index index.html index.php;
 
-        server_name _;
-    location /adminer {
-      proxy_pass http://adminer:8080/;
-    }
-    location / {
-		try_files $uri $uri/ =404;
-		autoindex on;
-	}
-	location ~ \.php$ {
-		include snippets/fastcgi-php.conf;
-		fastcgi_pass wordpress:9000;
-	}
+        server_name Inception;
+        location /website {
+          autoindex on;
+        }
+        location /adminer {
+          proxy_pass http://adminer:8080/;
+        }
+        location / {
+          try_files $uri $uri/ =404;
+          autoindex on;
+        }
+        location ~ \.php$ {
+          include snippets/fastcgi-php.conf;
+          fastcgi_pass wordpress:9000;
+        }
 }
