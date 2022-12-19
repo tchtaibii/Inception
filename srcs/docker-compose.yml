@@ -76,6 +76,15 @@ services:
     #   - "3000:3000"
     networks:
       - net
+  grafana:
+    depends_on:
+      - nginx
+    container_name: grafana
+    build : ${PWD}/requirements/bonus/grafana
+    # ports:
+    #   - "3000:3000"
+    networks:
+      - net
 #volumes 
 volumes:
   #wordpress volume

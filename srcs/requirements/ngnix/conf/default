@@ -16,8 +16,16 @@ server {
         index index.html index.php;
 
         server_name Inception;
+
+        location /grafana {
+          proxy_pass http://grafana:3000;
+          proxy_set_header Host $http_host;
+          proxy_set_header X-Forwarded-Host $host:$server_port;
+          proxy_set_header X-Forwarded-Server $host;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
         location /website/ {
-          proxy_pass http://website:3000/;
+          proxy_pass http://website:777/;
           autoindex on;
         }
         location /adminer {

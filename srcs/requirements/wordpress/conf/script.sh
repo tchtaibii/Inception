@@ -1,4 +1,4 @@
-echo "listen = 9000" >> /etc/php/7.3/fpm/pool.d/www.conf
+echo "listen = 9000" >> /etc/php/7.4/fpm/pool.d/www.conf
 chown -R www-data:www-data /var/www/html/wordpress
 chmod -R 777 /var/www/html/wordpress
 wp core install --url=https://127.0.0.1  --title=${title} --admin_user=${admin_user} --admin_password=${admin_password} --admin_email=${admin_email} --path="/var/www/html/wordpress" --allow-root --skip-email

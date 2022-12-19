@@ -19,5 +19,4 @@ WORKDIR /
 COPY /conf/script.sh /
 RUN chmod 777 /script.sh
 ENTRYPOINT [ "bash", "script.sh" ]
-# RUN ./script.sh
 CMD ["php-fpm7.3", "-F", "-R"]
