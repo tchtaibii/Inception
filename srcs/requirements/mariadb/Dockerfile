@@ -4,9 +4,9 @@ RUN apt-get update -y && apt-get upgrade -y
 RUN apt-get install -y  mariadb-server mariadb-client
 RUN rm -f /etc/mysql/mariadb.conf.d/50-server.cnf
 
-COPY ${PWD}/requirements/mariadb/conf/50-server.cnf /etc/mysql/mariadb.conf.d/
-COPY ${PWD}/requirements/mariadb/conf/script.sh /
-COPY ${PWD}/requirements/mariadb/conf/my.cnf /etc/mysql/my.cnf
+COPY /conf/50-server.cnf /etc/mysql/mariadb.conf.d/
+COPY /conf/script.sh /
+COPY /conf/my.cnf /etc/mysql/my.cnf
 
 ARG DB_NAME \
     MYSQL_USER \

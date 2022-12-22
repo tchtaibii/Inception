@@ -1,17 +1,18 @@
 all: add_v up 
 
-# add_host:
-# 	echo "127.0.1.1       tchtaibi.42.fr" >> /etc/hosts
+add_host:
+	chomd 777 /etc/hosts
+	echo "127.0.1.1       tchtaibi.42.fr" >> /etc/hosts
 
 restart:
-	@cd srcs/ ; docker compose -f ./docker-compose.yml restart
+	@cd srcs/ ; docker-compose -f ./docker-compose.yml restart
 
 up:
 	@tput setaf 2; echo "🕐 Please wait..."
-	@cd srcs ; docker compose -f ./docker-compose.yml up --build
+	@cd srcs ; docker-compose -f ./docker-compose.yml up --build
 
 down : clean
-	@cd /srcs ;  docker compose -f ./docker-compose.yml down
+	@cd /srcs ;  docker-compose -f ./docker-compose.yml down
 clean: 
 	@docker system prune -af
 	@docker volume rm  -f srcs_mariadb srcs_wordpress
