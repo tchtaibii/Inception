@@ -1,8 +1,8 @@
 all: add_v up 
 
 add_host:
-	chomd 777 /etc/hosts
-	echo "127.0.1.1       tchtaibi.42.fr" >> /etc/hosts
+	@chmod 777 /etc/hosts
+	@echo "127.0.1.1       tchtaibi.42.fr" >> /etc/hosts
 
 restart:
 	@cd srcs/ ; docker-compose -f ./docker-compose.yml restart
@@ -27,5 +27,5 @@ add_v:
 	@tput setaf 2; echo "Dir volumes are created ✅"
 
 delete_v: 
-	cd srcs/tools/volume ; rm -rf *
+	cd srcs/tools/volume ; rm -rf wordpress db
 	@tput setaf 1; echo "Dir volumes are deleted ❌"
