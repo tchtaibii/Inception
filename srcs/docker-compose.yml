@@ -53,6 +53,17 @@ services:
     networks:
       - net
     restart: unless-stopped
+  #reverse_proxy
+  haproxy:
+    depends_on:
+      - nginx
+    build: ${PWD}/requirements/bonus/reverse_proxy/
+    container_name: haproxy
+    ports:
+      - "8443:8443"
+    networks:
+      - net
+    restart: unless-stopped
   #redis container
   redis :
     container_name : redis
