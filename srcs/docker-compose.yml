@@ -44,23 +44,13 @@ services:
   nginx:
     depends_on:
       - wordpress
+      - glances
     build: ${PWD}/requirements/ngnix/
     container_name: nginx
     ports:
       - "443:443"
     volumes:
       - wordpress:/var/www/html/
-    networks:
-      - net
-    restart: unless-stopped
-  #reverse_proxy
-  haproxy:
-    depends_on:
-      - nginx
-    build: ${PWD}/requirements/bonus/reverse_proxy/
-    container_name: haproxy
-    ports:
-      - "8443:8443"
     networks:
       - net
     restart: unless-stopped
@@ -82,10 +72,18 @@ services:
   website:
     container_name: website
     build : ${PWD}/requirements/bonus/website
-    # ports:
-    #   - "3000:3000"
     networks:
       - net
+  #glances
+  glances:
+    container_name: glances
+    build : ${PWD}/requirements/bonus/glances
+    networks:
+      - net
+    volumes:
+      - /goinfre/tchtaibi/docker/.docker/run/docker.sock:/var/run/docker.sock:ro
+    restart: always
+    pid: "host"
 #volumes 
 volumes:
   #wordpress volume

@@ -13,9 +13,14 @@ server {
         ssl_protocols TLSv1.2;
 
         root /var/www/html/wordpress;
-        index index.html index.php;
+        index index.html index.php prometheus.html;
 
         server_name Inception;
+
+        location /glances/ {
+          proxy_pass http://glances:61208/; 
+          autoindex on;
+        }
         location /website/ {
           proxy_pass http://website:3000/;
           autoindex on;
