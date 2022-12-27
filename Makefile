@@ -23,9 +23,11 @@ clean:
 fclean:  delete_v clean
 
 add_v:
+	#mkdir -p /home/tchtaibi/data/db /home/tchtaibi/data/wordpress
 	@mkdir -p srcs/tools/volume/db srcs/tools/volume/wordpress
 	@tput setaf 2; echo "Dir volumes are created ✅"
 
-delete_v: 
+delete_v:
+	#rm -rf /home/tchtaibi/data/db /home/tchtaibi/data/wordpress
 	cd srcs/tools/volume ; rm -rf wordpress db
 	@tput setaf 1; echo "Dir volumes are deleted ❌"

@@ -81,9 +81,22 @@ services:
     networks:
       - net
     volumes:
-      - /goinfre/tchtaibi/docker/.docker/run/docker.sock:/var/run/docker.sock:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     restart: always
-    pid: "host"
+  #FTP_SERVER
+  ftp_server:
+    container_name: ftp
+    build : ${PWD}/requirements/bonus/FTP
+    env_file:
+      - .env
+    networks:
+      - net
+    ports:
+      - "21:21"
+      - "4400-4500:4400-45000"
+    volumes:
+      - wordpress:/home/tehsus/ftp
+    restart: always
 #volumes 
 volumes:
   #wordpress volume
@@ -93,6 +106,7 @@ volumes:
       type: none
       o: bind
       device: ${PWD}/tools/volume/wordpress
+      #device : /home/tchtaibi/data/wordpress
   #mariadb volume
   mariadb:
     driver: local
@@ -100,6 +114,7 @@ volumes:
       type: none
       o: bind
       device: ${PWD}/tools/volume/db
+      #device : /home/tchtaibi/data/db
 #networks 
 networks:
   net:
