@@ -1,4 +1,4 @@
-if [ ! -e "/etc/vsftpd.conf.tchtaibi" ]; then
+if [ ! -e "/var/run/vsftpd/a.c" ]; then
     mkdir -p /var/run/vsftpd/empty
     mv /etc/vsftpd.conf /etc/vsftpd.conf.tchtaibi
     mv /tmp/vsftpd.conf /etc/
@@ -9,6 +9,7 @@ if [ ! -e "/etc/vsftpd.conf.tchtaibi" ]; then
     chmod -R 777 /home/tehsus/
     chmod +x /etc/vsftpd.conf
     echo $FTP_USER | tee -a /etc/vsftpd.userlist &> /dev/null
+    touch /var/run/vsftpd/a.c
 fi
 
 echo "FTP started on :21 " $FTP_USER
