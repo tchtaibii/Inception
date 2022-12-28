@@ -108,16 +108,16 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: ${PWD}/srcs/tools/volume/wordpress
-      #device : /home/tchtaibi/data/wordpress
+      #device: ${PWD}/srcs/tools/volume/wordpress
+      device : /home/tchtaibi/data/wordpress
   #mariadb volume
   mariadb:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: ${PWD}/srcs/tools/volume/db
-      #device : /home/tchtaibi/data/db
+      #device: ${PWD}/srcs/tools/volume/db
+      device : /home/tchtaibi/data/db
 #networks 
 networks:
   net:

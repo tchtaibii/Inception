@@ -1,9 +1,9 @@
 all: add_v up 
 
 add_host:
-	@tput setaf 1; echo "CLEAN COMPLET ❌"
 	@chmod 777 /etc/hosts
 	@echo "127.0.1.1       tchtaibi.42.fr" >> /etc/hosts
+	@tput setaf 2; echo "'tchtaibi.42.fr' ✅"
 
 stop :
 	@docker-compose -f ./srcs/docker-compose.yml stop
@@ -28,11 +28,11 @@ clean:
 fclean:  delete_v clean
 
 add_v:
-	#mkdir -p /home/tchtaibi/data/db /home/tchtaibi/data/wordpress
-	@mkdir -p ./srcs/tools/volume/db ./srcs/tools/volume/wordpress
+	@mkdir -p /home/tchtaibi/data/db /home/tchtaibi/data/wordpress
+	#mkdir -p ./srcs/tools/volume/db ./srcs/tools/volume/wordpress
 	@tput setaf 2; echo "Dir volumes are created ✅"
 
 delete_v:
-	#rm -rf /home/tchtaibi/data/db /home/tchtaibi/data/wordpress
-	@rm -rf ./srcs/tools/volume/wordpress ./srcs/tools/volume/db
+	@rm -rf /home/tchtaibi/data/db /home/tchtaibi/data/wordpress
+	#rm -rf ./srcs/tools/volume/wordpress ./srcs/tools/volume/db
 	@tput setaf 1; echo "Dir volumes are deleted ❌"
