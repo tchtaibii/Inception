@@ -16,13 +16,13 @@ up:
 down :
 	@docker-compose -f ./srcs/docker-compose.yml down
 clean:
-	@docker rm -f $(docker ps -aq)
-	@docker rmi $(docker images -a -q)
-	@docker images -a | grep "pattern" | awk '{print $3}' | xargs docker rmi
 	@docker system prune -af
 	@docker volume rm  -f srcs_mariadb srcs_wordpress
 	@docker image prune -f
 	@docker volume prune -f
+	@docker images -a | grep "pattern" | awk '{print $3}' | xargs docker rmi
+	@docker rm -f $(docker ps -aq)
+	@docker rmi $(docker images -a -q)
 	@tput setaf 1; echo "CLEAN COMPLET ❌"
 
 fclean:  delete_v clean
