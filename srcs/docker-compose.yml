@@ -4,8 +4,8 @@ services:
   #mariadb container
   mariadb:
     build:
-      context: ${PWD}/requirements/mariadb/
-      dockerfile: ${PWD}/requirements/mariadb/Dockerfile
+      context: ${PWD}/srcs/requirements/mariadb/
+      dockerfile: ${PWD}/srcs/requirements/mariadb/Dockerfile
       args:
         - DB_NAME
         - MYSQL_USER
@@ -23,7 +23,7 @@ services:
     depends_on:
       - mariadb
     build: 
-      context: ${PWD}/requirements/wordpress/
+      context: ${PWD}/srcs/requirements/wordpress/
       args:
         - DB_NAME
         - DB_USER
@@ -45,7 +45,9 @@ services:
     depends_on:
       - wordpress
       - glances
-    build: ${PWD}/requirements/ngnix/
+      - website
+      - adminer
+    build: ${PWD}/srcs/requirements/ngnix/
     container_name: nginx
     ports:
       - "443:443"
@@ -57,7 +59,7 @@ services:
   #redis container
   redis :
     container_name : redis
-    build : ${PWD}/requirements/bonus/redis
+    build : ${PWD}/srcs/requirements/bonus/redis
     networks:
       - net
   #adminer
@@ -65,19 +67,19 @@ services:
     depends_on:
       - mariadb
     container_name: adminer
-    build: ${PWD}/requirements/bonus/adminer
+    build: ${PWD}/srcs/requirements/bonus/adminer
     networks:
       - net
   #website
   website:
     container_name: website
-    build : ${PWD}/requirements/bonus/website
+    build : ${PWD}/srcs/requirements/bonus/website
     networks:
       - net
   #glances
   glances:
     container_name: glances
-    build : ${PWD}/requirements/bonus/glances
+    build : ${PWD}/srcs/requirements/bonus/glances
     networks:
       - net
     volumes:
@@ -86,14 +88,15 @@ services:
   #FTP_SERVER
   ftp_server:
     container_name: ftp
-    build : ${PWD}/requirements/bonus/FTP
+    build: ${PWD}/srcs/requirements/bonus/FTP
+    ports:
+      - "4400-4500:4400-4500"
+      - "21:21"
+      - "20:20"
     env_file:
       - .env
     networks:
       - net
-    ports:
-      - "21:21"
-      - "4400-4500:4400-45000"
     volumes:
       - wordpress:/home/tehsus/ftp
     restart: always
@@ -105,7 +108,7 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: ${PWD}/tools/volume/wordpress
+      device: ${PWD}/srcs/tools/volume/wordpress
       #device : /home/tchtaibi/data/wordpress
   #mariadb volume
   mariadb:
@@ -113,7 +116,7 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: ${PWD}/tools/volume/db
+      device: ${PWD}/srcs/tools/volume/db
       #device : /home/tchtaibi/data/db
 #networks 
 networks:
